@@ -8,6 +8,9 @@ public class Message implements Serializable,MessageType{
 	private String content;
 	private String messageType;
 	
+	/*public Message(String sender){//构造方法
+		this.sender=sender;
+	}*/
 	public String getContent() {
 		return content;
 	}
