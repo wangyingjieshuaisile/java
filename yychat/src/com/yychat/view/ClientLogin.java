@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 import javax.swing.*;
 
@@ -86,8 +89,23 @@ public class ClientLogin extends JFrame implements ActionListener{//类名：Client
 			Message mess=new ClientConnetion().loginValidate(user);
 			if(mess.getMessageType().equals(Message.message_LoginSuccess)){
 				new FriendList(userName);
-				this.dispose();
 				
+				//第1步
+				//发送message_RequestOnlineFriend信息给服务器
+				Message mess1=new Message();
+				mess1.setSender(userName);
+				mess1.setReceiver("Server");
+				mess1.setMessageType(Message.message_RequestOnlineFriend);//设置信息类型
+				Socket s=(Socket)ClientConnetion.hmSocket.get(userName);
+				ObjectOutputStream oos;
+				try {
+					oos=new ObjectOutputStream(s.getOutputStream());
+					oos.writeObject(mess1);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				this.dispose();
 			}else{
 				JOptionPane.showMessageDialog(this,"密码错误");
 			}

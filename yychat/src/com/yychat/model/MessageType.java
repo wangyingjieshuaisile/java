@@ -1,8 +1,10 @@
 package com.yychat.model;
 
 public interface MessageType {
-	String message_LoginFailure="0";//常量
+	String message_LoginFailure="0";//字符串常量
 	String message_LoginSuccess="1";
 	String message_Common="2";
+	String message_RequestOnlineFriend="3";
+	String message_OnlineFriend="4";
 
 }

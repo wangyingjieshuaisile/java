@@ -1,4 +1,4 @@
-/*package com.yychat.view;
+package com.yychat.view;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ import javax.swing.*;
 import com.yychat.controller.ClientConnetion;
 import com.yychat.model.Message;
 
-public class FriendChat extends JFrame implements ActionListener,Runnable{//只允许单继承，但是可以实现多接口
+public class FriendChat1 extends JFrame implements ActionListener{//只允许单继承，但是可以实现多接口
 	JScrollPane jsp;
 	JTextArea jta;
 	
@@ -25,7 +25,7 @@ public class FriendChat extends JFrame implements ActionListener,Runnable{//只允
 	String receiver;
 	
 
-	public FriendChat(String sender,String receiver) {
+	public FriendChat1(String sender,String receiver) {
 		this.sender=sender;
 		this.receiver=receiver;
 		
@@ -81,30 +81,12 @@ public class FriendChat extends JFrame implements ActionListener,Runnable{//只允
 				mess=(Message)ois.readObject();
 				jta.append(mess.getSender()+"对"+mess.getReceiver()+"说:"+mess.getContent()+"\r\n");
 				*/
-/*				} catch (IOException  e) {
-				e.printStackTrace();
-			}
-		}
-		
-		
-	}
-
-	@Override
-	public void run() {
-		ObjectInputStream ois;
-		Message mess;
-		while(true){
-			try {
-				//接受服务器转发过来的Message
-				Socket s=(Socket)ClientConnetion.hmSocket.get(sender);
-				ois = new ObjectInputStream(s.getInputStream());
-				mess=(Message)ois.readObject();//等待Server发送Message，阻塞
-				jta.append(mess.getSender()+"对"+mess.getReceiver()+"说:"+mess.getContent()+"\r\n");
-			} catch (IOException | ClassNotFoundException e) {
+				} catch (IOException  e) {
 				e.printStackTrace();
 			}
 		}
 	}
-
-}*/
-
+	public void appendJta(String chatMessageString){
+		jta.append(chatMessageString+"\r\n");
+	}
+}
