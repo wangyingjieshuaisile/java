@@ -9,7 +9,7 @@ public class Message implements Serializable,MessageType{
 	private String messageType;
 	
 	/*public Message(String sender){//构造方法
-		this.sender = sender;
+		this.sender=sender;
 	}*/
 	public String getContent() {
 		return content;
@@ -34,5 +34,8 @@ public class Message implements Serializable,MessageType{
 	}
 	public void setMessageType(String messageType) {
 		this.messageType = messageType;
-	}	
+	}
+	
+	
+
 }

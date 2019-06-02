@@ -48,7 +48,7 @@ public class FriendList extends JFrame implements ActionListener,MouseListener {
     
     String userName;//成员变量
         
-    public  FriendList(String userName){//形参
+    public  FriendList(String userName,String friendString){//形参
     	this.userName=userName;
     	//创建第一张卡片
     	myFriendPanel=new JPanel(new BorderLayout());//布局问题，边界布局
@@ -59,7 +59,28 @@ public class FriendList extends JFrame implements ActionListener,MouseListener {
     	myFriendPanel.add(myFriendButton,"North");
     	
     	//中部
-    	myFriendListJPanel=new JPanel(new GridLayout(MYFRIENDCOUNT-1,1));//网格布局
+    	String[] friendName=friendString.split(" ");
+    	int count=friendName.length;
+    	
+    	myFriendListJPanel=new JPanel(new GridLayout(count,1));//网格布局
+    	for(int i=0;i<count;i++){
+			myFriendJLabel[i]=new JLabel(friendName[i]+"",new ImageIcon("images/yy0.gif"),JLabel.LEFT);
+			//myFriendJLabel[i].setEnabled(false);
+			//激活自己的图标
+			//if(Integer.parseInt(userName)==i) myFriendJLabel[i].setEnabled(true);		
+			myFriendJLabel[i].addMouseListener(this);
+			myFriendListJPanel.add(myFriendJLabel[i]);   
+		}
+    	//激活自己的图标
+    	//myFriendJLabel[Integer.parseInt(userName)].setEnabled(true);
+    	/*myFriendListJScrollPane=new JScrollPane();
+    	myFriendListJScrollPane.add(myFriendListJPanel);*/
+    	myFriendListJScrollPane=new JScrollPane(myFriendListJPanel);
+    	myFriendPanel.add(myFriendListJScrollPane);
+
+    	
+    	
+    	/*myFriendListJPanel=new JPanel(new GridLayout(MYFRIENDCOUNT-1,1));//网格布局
     	for(int i=1;i<MYFRIENDCOUNT;i++){
 			myFriendJLabel[i]=new JLabel(i+"",new ImageIcon("images/yy0.gif"),JLabel.LEFT);
 			myFriendJLabel[i].setEnabled(false);
@@ -69,11 +90,11 @@ public class FriendList extends JFrame implements ActionListener,MouseListener {
 			myFriendListJPanel.add(myFriendJLabel[i]);   
 		}
     	//激活自己的图标
-    	myFriendJLabel[Integer.parseInt(userName)].setEnabled(true);
+    	//myFriendJLabel[Integer.parseInt(userName)].setEnabled(true);
     	/*myFriendListJScrollPane=new JScrollPane();
-    	myFriendListJScrollPane.add(myFriendListJPanel);*/
+    	myFriendListJScrollPane.add(myFriendListJPanel);
     	myFriendListJScrollPane=new JScrollPane(myFriendListJPanel);
-    	myFriendPanel.add(myFriendListJScrollPane);
+    	myFriendPanel.add(myFriendListJScrollPane);*/
     	
     	//南部
     	myStrangerBlackListPanel=new JPanel(new GridLayout(2,1));//网格布局
@@ -130,11 +151,16 @@ public class FriendList extends JFrame implements ActionListener,MouseListener {
 		//FriendList friendList=new FriendList("pdh");
     }
     
+    public void setEnabledNewOnlineFriend(String newonlineFriend){
+    	myFriendJLabel[Integer.parseInt(newonlineFriend)].setEnabled(true);
+    }
+    
     public void setEnabledOnlineFriend(String onlineFriend){
     	//激活在线好友图标 
     	String[] friendName=onlineFriend.split(" ");
     	//System.out.println("friendName数组中的第一个元素："+friendName[0]);
     	int count=friendName.length;
+    	
     	System.out.println("friendName数组中的元素个数："+count);
     	for(int i=1;i<count;i++){
     		System.out.println("friendName数组中的第"+i+"元素:"+friendName[i]);
